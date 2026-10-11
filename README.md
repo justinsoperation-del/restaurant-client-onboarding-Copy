@@ -30,3 +30,7 @@ Create a new private GitHub repository named `restaurant-client-onboarding` (do 
 The supplied brief specifies **$500 setup; $250 deposit; $200 per month after launch**. The $200 monthly figure differs from prior RA Famous-specific $250/month pricing; verify with Justin before giving this page to a particular restaurant.
 
 This project doesn't process food orders, store data, collect customer payment details, or send email. No payment, signature or onboarding persistence is active.
+
+
+## October 2026 billing update
+Stripe-hosted links: full setup $499.99, deposit $249.99, remaining balance $250.00, monthly management $249.99. The separate service agreement must be signed before payment. This static site does not capture signatures or confirm payment: verify directly in Stripe. Do not send the recurring subscription link before launch. Verify all links, prices and billing intervals in Stripe dashboard before sharing.
