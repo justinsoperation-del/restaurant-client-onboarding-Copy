@@ -7,7 +7,11 @@ export async function sendLoginLink(form:FormData){
  const db=await portalDb();
  const origin=process.env.NEXT_PUBLIC_SITE_URL;
  if(!origin||!origin.startsWith('https://')) throw new Error('Set NEXT_PUBLIC_SITE_URL to your HTTPS portal domain');
- await db.auth.signInWithOtp({email,options:{shouldCreateUser:false,emailRedirectTo:origin+'/auth/callback'}});
+ const {error}=await db.auth.signInWithOtp({email,options:{shouldCreateUser:false,emailRedirectTo:origin+'/auth/callback'}});
+ if(error){
+   if(error.status===429 || error.code==='over_email_send_rate_limit') redirect('/login?error=email_limit');
+   redirect('/login?error=email_failed');
+ }
  redirect('/login?sent=1');
 }
 export async function logOut(){
