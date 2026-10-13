@@ -7,4 +7,4 @@ export async function middleware(req:NextRequest){
  const db=createServerClient(url,key,{cookies:{getAll:()=>req.cookies.getAll(),setAll(items: {name:string;value:string;options?:Record<string,any>}[]){items.forEach(({name,value})=>req.cookies.set(name,value));res=NextResponse.next({request:req});items.forEach(({name,value,options})=>res.cookies.set(name,value,options))}}});
  await db.auth.getUser();return res;
 }
-export const config={matcher:['/portal/:path*','/login/:path*','/auth/:path*']};
+export const config={matcher:['/portal/:path*','/admin/:path*','/login/:path*','/auth/:path*']};
