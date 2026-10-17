@@ -6,7 +6,7 @@ let client: SupabaseClient | null = null;
 // Never put a service-role or secret key in NEXT_PUBLIC_* variables.
 export function getSupabase(): SupabaseClient {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!url || !key) throw new Error('Client portal is not configured yet.');
   if (!client) client = createClient(url, key, {
     auth: { autoRefreshToken: true, persistSession: true, detectSessionInUrl: true },
