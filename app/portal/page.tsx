@@ -56,10 +56,14 @@ export default function Portal() {
       }
     }
     initialize();
-    const { data: subscription } = getSupabase().auth.onAuthStateChange((event) => {
-      if (event === 'SIGNED_OUT') window.location.assign('/login');
-    });
-    return () => { active = false; subscription.subscription.unsubscribe(); };
+    let unsubscribe: (() => void) | undefined;
+    try {
+      const { data } = getSupabase().auth.onAuthStateChange((event) => {
+        if (event === 'SIGNED_OUT') window.location.assign('/login');
+      });
+      unsubscribe = () => data.subscription.unsubscribe();
+    } catch { /* Configuration error is surfaced by initialize(). */ }
+    return () => { active = false; unsubscribe?.(); };
   }, []);
 
   useEffect(() => {
